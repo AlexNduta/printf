@@ -11,7 +11,7 @@ int _printf(const char *format, ...)
 	va_list mylist;
 
 	va_start(mylist, format);
-	while (format != NULL && format != '\0')
+	while (format != NULL && format[i] != '\0')
 	{
 		if (format[i] == '%')
 		{
@@ -19,7 +19,7 @@ int _printf(const char *format, ...)
 			if (format[i] == '%')
 			{
 				putchar('%');
-				coutnt++;
+				count++;
 			}
 			else if (format[i] == 'c')
 			{
