@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 		if (format[i] != '%') /*write to temp buffer till we get "%" */
 		{
 			length = check_buff(our_buffer, length);
-			our_buffer[len++] = format[i++];
+			our_buffer[length++] = format[i++];
 			total++;
 		} else /*incase we get '%' */
 		{
@@ -41,7 +41,7 @@ int _printf(const char *format, ...)
 			}
 		}
 	}
-	write_buff(our_buffer, length, mylist);
+	write_to_buffer(our_buffer, length, mylist);
 	return (total);
 }
 
