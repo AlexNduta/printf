@@ -31,5 +31,5 @@ int length, int total, va_list mylist)
 		our_buffer[length++] = format[i];
 		total++;
 	}
-	return (total)
+	return (total);
 }
