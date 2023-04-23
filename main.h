@@ -4,7 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-char *print_c(va_list mylist);
+char *spec_c(va_list mylist);
+char *spec_s(va_list mylist);
+char *spec_d(va_list mylist);
+int _strlen(char *s);
 int _printf(const char *format, ...);
 int check_buff(char *our_buffer, int length);
 char *create_buff(void);
