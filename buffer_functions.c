@@ -12,10 +12,10 @@ int check_buff(char *our_buffer, int length)
 {
 	if (length > 1020)
 	{
-		write(1, our_buffer, lenght);
+		write(1, our_buffer, length);
 		length = 0;
 	}
-	return (legth);
+	return (length);
 }
 
 
@@ -46,10 +46,10 @@ void write_to_buffer(char *our_buffer, int length, va_list mylist)
 {
 	char *buff_to_print;
 
-	buff = realloc(our_buffer, length);
+	buff_to_print = realloc(our_buffer, length);
 
-	write(1, buff_to_print, length)
+	write(1, buff_to_print, length);
 
-	free(buffer_to_print);
+	free(buff_to_print);
 	va_end(mylist);
 }
