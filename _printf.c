@@ -7,46 +7,41 @@
  */
 int _printf(const char *format, ...)
 {
-	int i = 0;
-	int count = 0;
+	int i = 0, length = 0, total = 0;
 	va_list mylist;
+	char *our_buffer, *string, *(*holder)(va_list);
+
+	if (format == NULL)
+		return (1);
+
+	our_buffer = create_buff();
+
+	if (our_buffer == NULL)
+		return (1);
 
 	va_start(mylist, format);
-	while (format != NULL && format[i] != '\0')
+
+	for (i = 0; format != NULL && format[i] != '\0'; i++)
 	{
-		if (format[i] == '%')
+		if (format[i] != '%') /*write to temp buffer till we get "%" */
 		{
-			format++;
-			if (format[i] == '%')
-			{
-				putchar('%');
-				count++;
-			}
-			else if (format[i] == 'c')
-			{
-				char c = va_arg(mylist, int);
-
-				putchar(c);
-				count++;
-			}
-			else if (format[i] == 's')
-			{
-				char *str = va_arg(mylist, char *);
-
-				while (*str)
-				{
-				putchar(*str);
-				str++;
-				count++;
-				}
-			}
-		} else
+			length = check_buff(our_buffer, length);
+			our_buffer[len++] = format[i++];
+			total++;
+		} else /*incase we get '%' */
 		{
-			putchar(format[i]);
-			count++;
+			i++;
+			if (format[i] == '\0') /* incase we have single % at the end */
+			{
+/* incase we have a single % at the end, we end the function */
+				total = handle_percent(our_buffer, format, i, length, total, mylist);
+			} else
+			{
+				total = handle_conversion_specifier(our_buffer, format, i, total, mylist);
+			}
 		}
-	i++;
 	}
-	va_end(mylist);
-	return (count);
+	write_buff(our_buffer, length, mylist);
+	return (total);
 }
+

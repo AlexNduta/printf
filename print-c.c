@@ -6,7 +6,7 @@
  *
  *Return: character pointer or string array
  */
-char *print-c(va_list mylist)
+char *print_c(va_list mylist)
 {
 	char *s = malloc(sizeof(char) * 2);
 
