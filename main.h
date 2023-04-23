@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+char *print-c(va_list mylist);
 int _printf(const char *format, ...);
 int check_buff(char *our_buffer, int length);
 char *create_buff(void);
