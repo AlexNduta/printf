@@ -20,7 +20,7 @@ int i, int length, int total, va_list mylist)
 	if (holder == NULL)
 	{
 		length = check_buff(our_buffer, length);
-		our_buffer[lenghth++] = '%';
+		our_buffer[length++] = '%';
 		total++;
 		our_buffer[length++] = format[i];
 		total++;
