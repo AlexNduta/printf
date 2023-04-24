@@ -38,7 +38,8 @@ int _printf(const char *format, ...)
 			} else
 			{
 				va_copy(mylist_copy, mylist); /* create a copy of va_list */
-				total = handle_conversion_specifier(our_buffer, format, i, length, total, mylist_copy); /*pass the copy of va_list */
+				total = handle_conversion_specifier(our_buffer, format, i,
+				length, total, mylist_copy); /*pass the copy of va_list */
 				va_end(mylist_copy); /* End the copy of va_list after its used */
 			}
 		}
