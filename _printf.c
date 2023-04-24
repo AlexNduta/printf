@@ -8,8 +8,8 @@
 int _printf(const char *format, ...)
 {
 	int i = 0, length = 0, total = 0;
-	va_list mylist;
-	char *our_buffer, *string, *(*holder)(va_list);
+	va_list mylist, mylist_copy; /*add mylist_copy */
+	char *our_buffer;
 
 	if (format == NULL)
 		return (1);
@@ -37,7 +37,9 @@ int _printf(const char *format, ...)
 				total = handle_percent(our_buffer, format, i, length, total, mylist);
 			} else
 			{
-				total = handle_conversion_specifier(our_buffer, format, i, total, mylist);
+				va_copy(mylist_copy, mylist); /* create a copy of va_list */
+				total = handle_conversion_specifier(our_buffer, format, i, length, total, mylist_copy); /*pass the copy of va_list */
+				va_end(mylist_copy); /* End the copy of va_list after its used */
 			}
 		}
 	}

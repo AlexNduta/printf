@@ -15,7 +15,8 @@ int i, int length, int total, va_list mylist)
 	char *(*holder)(va_list);
 	char *string;
 	int j = 0;
-
+	va_list mylist_copy; /* create a copy of va_list */
+	va_copy(mylist_copy, mylist);
 	holder = give_function(format[i]);
 	if (holder == NULL)
 	{
@@ -26,10 +27,10 @@ int i, int length, int total, va_list mylist)
 		total++;
 	} else
 	{
-		string = holder(mylist);
+		string = holder(mylist_copy); /* pass the copy to the holder fun */
 		if (string == NULL)
 		{
-			va_end(mylist);
+			va_end(mylist_copy); /* End the copy after being used */
 			free(our_buffer);
 			return (1);
 		}
