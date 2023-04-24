@@ -9,6 +9,7 @@ char *spec_c(va_list mylist);
 char *spec_s(va_list mylist);
 char *spec_d(va_list mylist);
 int _strlen(char *s);
+char* (*give_function(char i))(va_list);
 int _printf(const char *format, ...);
 
 /* Helper functions */
