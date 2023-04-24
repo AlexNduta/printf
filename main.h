@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+/*main functions */
 char *spec_c(va_list mylist);
 char *spec_s(va_list mylist);
 char *spec_d(va_list mylist);
