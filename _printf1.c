@@ -2,16 +2,16 @@
 int _printf(const char *format, ...) {
     int length = 0, i;
     char buffer[1024] = {0};
-    va_list args;
-    va_start(args, format);
+    va_list mylist;
+    va_start(mylist, format);
 
     for (i = 0; format[i]; i++) {
         if (format[i] == '%') {
             format_func func = give_function(format[i + 1]);
             if (func != NULL) {
-                char *str = func(args);
+                char *str = func(mylist);
                 if (str != NULL) {
-                    int str_len =_strlen(str);
+                    int str_len = strlen(str);
                     length = check_buff(buffer, length + str_len);
                     strcat(buffer, str);
                     length += str_len;
@@ -32,7 +32,7 @@ int _printf(const char *format, ...) {
         }
     }
 
-    va_end(args);
+    va_end(mylist);
 
     /* Flush the buffer */
     write_to_buffer(buffer, length);

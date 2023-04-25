@@ -44,14 +44,14 @@ char *create_buff(void)
  */
 void write_to_buffer(char *our_buffer, int length)
 {
-/*	char *buff_to_print;
+	/*char *buff_to_print;
 
 	buff_to_print = realloc(our_buffer, length);
 
 	write(1, buff_to_print, length);
 
 	free(buff_to_print);
-	va_end(mylist); */
+	va_end(mylist);*/
 
-    fwrite(our_buffer, sizeof(char), length, stdout);
+   fwrite(our_buffer, sizeof(char), length, stdout);
 }
