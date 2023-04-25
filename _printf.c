@@ -3,13 +3,13 @@
 /**
  *_printf - prints to the stdout
  *@format: mandatory input string
- *Return: the count
- */
+ *Return: the count *
 int _printf(const char *format, ...)
 {
-	int i = 0, length = 0, total = 0;
-	va_list mylist, mylist_copy; /*add mylist_copy */
-	char *our_buffer;
+	int i = 0, j = 0, length = 0, total = 0;
+	va_list mylist;
+	char *our_buffer, *string;
+	char *(*holder)(va_list);
 
 	if (format == NULL)
 		return (1);
@@ -21,30 +21,66 @@ int _printf(const char *format, ...)
 
 	va_start(mylist, format);
 
-	for (i = 0; format != NULL && format[i] != '\0'; i++)
+	while (*format)
 	{
-		if (format[i] != '%') /*write to temp buffer till we get "%" */
+		if (format[i] != '%')
 		{
 			length = check_buff(our_buffer, length);
 			our_buffer[length++] = format[i++];
 			total++;
-		} else /*incase we get '%' */
+		} else
 		{
 			i++;
-			if (format[i] == '\0') /* incase we have single % at the end */
+			if (format[i] == '\0')
 			{
-/* incase we have a single % at the end, we end the function */
-				total = handle_percent(our_buffer, format, i, length, total, mylist);
+				va_end(mylist);
+				free(our_buffer);
+				return (1);
+			}
+			if (format[i] == '%')
+			{
+				length = check_buff(our_buffer, length);
+				our_buffer[length++] = format[i];
+				total++;
 			} else
 			{
-				va_copy(mylist_copy, mylist); /* create a copy of va_list */
-				total = handle_conversion_specifier(our_buffer, format, i,
-				length, total, mylist_copy); /*pass the copy of va_list */
-				va_end(mylist_copy); /* End the copy of va_list after its used */
-			}
+				holder = give_function(format[i]);
+
+				if (holder == NULL)
+				{
+					length = check_buff(our_buffer, length);
+					our_buffer[length++] = '%';
+					total++;
+					our_buffer[length++] = format[i];
+					total++;
+				} else
+				{
+					 string = holder(mylist);
+
+					if (string == NULL)
+					{
+						va_end(mylist);
+						free(our_buffer);
+						return (1);
+					}
+					if (format[i] == 'c' && string[0] == '\0')
+					{
+						length = check_buff(our_buffer, length);
+
+							our_buffer[length++] = '\0';
+							total++;
+					}
+					while (string[j] == '\0')
+					{
+						length = check_buff(our_buffer, length);
+						our_buffer[length++] = string[j];
+						total++;
+					}
+					free(string);
+				}
+			} i++;
 		}
 	}
 	write_to_buffer(our_buffer, length, mylist);
 	return (total);
-}
-
+} */

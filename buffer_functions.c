@@ -29,7 +29,7 @@ char *create_buff(void)
 {
 	char *our_buffer;
 
-	our_buffer = malloc(sizeof(char) * 1024);
+	our_buffer = malloc(sizeof(char) * BUFFER_SIZE);
 	if (our_buffer == NULL)
 		return (NULL);
 	return (our_buffer);
@@ -42,14 +42,16 @@ char *create_buff(void)
  *@length: size of the content to be printed
  *@mylist: the list of variables to be printed
  */
-void write_to_buffer(char *our_buffer, int length, va_list mylist)
+void write_to_buffer(char *our_buffer, int length)
 {
-	char *buff_to_print;
+/*	char *buff_to_print;
 
 	buff_to_print = realloc(our_buffer, length);
 
 	write(1, buff_to_print, length);
 
 	free(buff_to_print);
-	va_end(mylist);
+	va_end(mylist); */
+
+    fwrite(our_buffer, sizeof(char), length, stdout);
 }

@@ -5,28 +5,18 @@
  *@i: character to be searcehd for in the array
  *
  *Return: return a character pointer
+ *
  */
-char* (*give_function(char i))(va_list)
-{
-	int k = 0;
-	char ids[] = {'c', 's', 'd', 'i'};
-
-	while (ids[k] != '0')
-	{
-		if (ids[k] == i)
-			break;
-		k++;
-	}
-	switch (ids[k])
-	{
-		case 'c':
-			return (spec_c);
-		case 's':
-			return (spec_s);
-		case 'd':
-		case 'i':
-			return (spec_d);
-		default:
-			return (NULL);
-	}
+format_func give_function(char c) {
+    /* Add cases for other format specifiers as needed */
+    switch (c) {
+        case 'c':
+            return spec_c;
+        case 's':
+            return spec_s;
+        case 'd':
+            return spec_d;
+        default:
+            return (NULL);
+    }
 }
